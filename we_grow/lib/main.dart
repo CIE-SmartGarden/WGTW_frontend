@@ -1,3 +1,5 @@
+// https://flutter.dev/docs/cookbook/networking/web-sockets
+
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -10,11 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new MyHomePage(
-        channel: new IOWebSocketChannel.connect("ws://echo.websocket.org"),
+        channel: new IOWebSocketChannel.connect("ws://192.168.43.144:5678"),
       ),
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   final WebSocketChannel channel;
