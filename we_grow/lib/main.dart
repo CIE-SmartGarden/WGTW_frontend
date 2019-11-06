@@ -11,13 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: new MyHomePage(
         channel: new IOWebSocketChannel.connect("ws://192.168.43.144:5678"),
       ),
     );
   }
 }
-
 
 class MyHomePage extends StatefulWidget {
   final WebSocketChannel channel;
@@ -35,7 +35,8 @@ class MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Web Socket"),
+        title: new Text("WGTW"),
+        backgroundColor: Color.fromRGBO(0, 255, 175, 100),
       ),
       body: new Padding(
         padding: const EdgeInsets.all(20.0),
@@ -60,9 +61,16 @@ class MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.send),
-        onPressed: _sendMyMessage,
+      floatingActionButton: Container(
+        height: 75.0,
+        width: 75.0,
+        child: FittedBox(
+            child: FloatingActionButton(
+          child: new Icon(Icons.search),
+          backgroundColor: Color.fromRGBO(0, 255, 175, 100),
+          onPressed: _sendMyMessage,
+          splashColor: Color(000000),
+        )),
       ),
     );
   }
