@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new MyHomePage(
-        channel: new IOWebSocketChannel.connect("ws://192.168.43.144:5678"),
+        channel: new IOWebSocketChannel.connect(
+            "ws://echo.websocket.org"), //ws://192.168.43.144:5678
       ),
     );
   }
@@ -34,51 +35,53 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("WGTW"),
-        backgroundColor: Color.fromRGBO(0, 255, 175, 100),
-      ),
-      body: new Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Form(
-              child: new TextFormField(
-                decoration: new InputDecoration(labelText: "Send any message"),
-                controller: editingController,
+      // appBar: new AppBar(
+      //   title: new Text("WGTW"),
+      //   backgroundColor: Color.fromRGBO(0, 255, 175, 100),
+      // ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 300.0,
+            floating: false,
+            pinned: true,
+            backgroundColor: Color.fromRGBO(0, 255, 175, 100),
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: new Text("WE GROW THE WORLD"),
+            ),
+          ),
+          SliverFillRemaining(
+            child: Center(
+              child: new StreamBuilder(
+                stream: widget.channel.stream,
+                builder: (context, snapshot) {
+                  return new Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: new Text(snapshot.hasData ? '${snapshot.data}' : 'SORRY'),
+                    
+                  );
+                },
               ),
             ),
-            new StreamBuilder(
-              stream: widget.channel.stream,
-              builder: (context, snapshot) {
-                return new Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: new Text(snapshot.hasData ? '${snapshot.data}' : ''),
-                );
-              },
-            )
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: Container(
-        height: 75.0,
-        width: 75.0,
+        height: 72.0,
+        width: 72.0,
         child: FittedBox(
             child: FloatingActionButton(
-          child: new Icon(Icons.search),
+          child: new Icon(Icons.golf_course),
           backgroundColor: Color.fromRGBO(0, 255, 175, 100),
-          onPressed: _sendMyMessage,
-          splashColor: Color(000000),
+          onPressed: _startf,
         )),
       ),
     );
   }
 
-  void _sendMyMessage() {
-    if (editingController.text.isNotEmpty) {
-      widget.channel.sink.add(editingController.text);
-    }
+  void _startf() {
+    widget.channel.sink.add("start");
   }
 
   @override
