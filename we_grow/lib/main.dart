@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 // https://flutter.dev/docs/cookbook/networking/web-sockets
 
+=======
+import 'package:flutter/cupertino.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -33,6 +37,7 @@ class MyHomePageState extends State<MyHomePage> {
   TextEditingController editingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("WGTW"),
@@ -48,6 +53,121 @@ class MyHomePageState extends State<MyHomePage> {
                 decoration: new InputDecoration(labelText: "Send any message"),
                 controller: editingController,
               ),
+=======
+    var scaffold = Scaffold(
+      // resizeToAvoidBottomPadding: false,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 300.0,
+            floating: true,
+            pinned: true,
+            backgroundColor: Color.fromRGBO(0, 255, 175, 1.0),
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: new Text("WE GROW THE WORLD"),
+            ),
+          ),
+          SliverFillRemaining(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: CupertinoButton(
+                        child: Container(
+                          height: 200,
+                          width: 160,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(94, 184, 255, 1.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              "tempurature",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Camera()),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: CupertinoButton(
+                        child: Container(
+                          height: 200,
+                          width: 160,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(94, 184, 255, 1.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              "tempurature",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Camera()),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(left: 1.0),
+                    child: CupertinoButton(
+                      child: Container(
+                        height: 300,
+                        width: 160,
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(94, 184, 255, 1.0),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          child: Text(
+                            "humidity",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Camera()),
+                        );
+                      },
+                    ))
+              ],
+>>>>>>> Stashed changes
             ),
             new StreamBuilder(
               stream: widget.channel.stream,
@@ -61,6 +181,7 @@ class MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+<<<<<<< Updated upstream
       floatingActionButton: Container(
         height: 75.0,
         width: 75.0,
@@ -72,6 +193,8 @@ class MyHomePageState extends State<MyHomePage> {
           splashColor: Color(000000),
         )),
       ),
+=======
+>>>>>>> Stashed changes
     );
   }
 
