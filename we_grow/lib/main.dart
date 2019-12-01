@@ -1,23 +1,19 @@
-<<<<<<< Updated upstream
-// https://flutter.dev/docs/cookbook/networking/web-sockets
-
-=======
 import 'package:flutter/cupertino.dart';
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-void main() => runApp(new MyApp());
+import 'camera.dart';
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new MyHomePage(
-        channel: new IOWebSocketChannel.connect("ws://192.168.43.144:5678"),
+      home: MyHomePage(
+        channel: new IOWebSocketChannel.connect('ws://192.168.43.144:5679'),
       ),
     );
   }
@@ -25,35 +21,38 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   final WebSocketChannel channel;
-  MyHomePage({@required this.channel});
 
+  const MyHomePage({Key key, this.channel}) : super(key: key);
   @override
-  MyHomePageState createState() {
-    return new MyHomePageState();
-  }
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   TextEditingController editingController = new TextEditingController();
+  WebSocketChannel channel;
+  TextEditingController controller;
+  final List<String> list = [];
+
+  @override
+  void initState() {
+    super.initState();
+    channel = IOWebSocketChannel.connect('ws://192.168.43.144:5679');
+    controller = TextEditingController();
+    channel.stream.listen((data) => setState(() => list.add(data)));
+  }
+
+  void _startf() {
+    channel.sink.add("start");
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("WGTW"),
-        backgroundColor: Color.fromRGBO(0, 255, 175, 100),
-      ),
-      body: new Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Form(
-              child: new TextFormField(
-                decoration: new InputDecoration(labelText: "Send any message"),
-                controller: editingController,
-              ),
-=======
     var scaffold = Scaffold(
       // resizeToAvoidBottomPadding: false,
       body: CustomScrollView(
@@ -167,46 +166,13 @@ class MyHomePageState extends State<MyHomePage> {
                       },
                     ))
               ],
->>>>>>> Stashed changes
             ),
-            new StreamBuilder(
-              stream: widget.channel.stream,
-              builder: (context, snapshot) {
-                return new Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: new Text(snapshot.hasData ? '${snapshot.data}' : ''),
-                );
-              },
-            )
-          ],
-        ),
+          ),
+        ],
       ),
-<<<<<<< Updated upstream
-      floatingActionButton: Container(
-        height: 75.0,
-        width: 75.0,
-        child: FittedBox(
-            child: FloatingActionButton(
-          child: new Icon(Icons.search),
-          backgroundColor: Color.fromRGBO(0, 255, 175, 100),
-          onPressed: _sendMyMessage,
-          splashColor: Color(000000),
-        )),
-      ),
-=======
->>>>>>> Stashed changes
     );
-  }
-
-  void _sendMyMessage() {
-    if (editingController.text.isNotEmpty) {
-      widget.channel.sink.add(editingController.text);
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.channel.sink.close();
-    super.dispose();
+    return scaffold;
   }
 }
+// ws://192.168.43.144:5678
+// ws://echo.websocket.org
