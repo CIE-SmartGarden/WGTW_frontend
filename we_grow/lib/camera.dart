@@ -34,8 +34,8 @@ class _CameraState extends State<Camera> {
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
           automaticallyImplyLeading: true,
-          title: Text('We Grow The World'),
-          backgroundColor: Color.fromRGBO(0, 255, 175, 100),
+          title: Text('Camera'),
+          backgroundColor: Color.fromRGBO(76, 205, 67, 1.0),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context, false),
@@ -57,7 +57,7 @@ class _CameraState extends State<Camera> {
         child: FittedBox(
             child: FloatingActionButton(
           child: new Icon(Icons.cached),
-          backgroundColor: Color.fromRGBO(0, 255, 175, 100),
+          backgroundColor: Color.fromRGBO(76, 205, 67, 1.0),
           onPressed: _startf,
         )),
       ),
